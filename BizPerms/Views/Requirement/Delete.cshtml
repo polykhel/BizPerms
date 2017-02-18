@@ -1,0 +1,38 @@
+﻿@model G4.BizPermit.Entities.Requirement
+@{
+    ViewBag.Title = "Delete Requirement";
+}
+
+<div class="page-header text-center">
+    <h1 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">REQUIREMENT</h1>
+</div>
+
+<div class="panel panel-danger">
+    <div class="panel-heading">ARE YOU SURE YOU WANT TO DELETE THIS RECORD?</div>
+    <div class="form-horizontal panel-body">
+
+        <dl class="dl-horizontal">
+            <dt>Requirement Name:</dt>
+            <dd>@Model.Name</dd>
+
+            <dt>Date Created:</dt>
+            <dd>@Model.CreatedDate.ToString("yyyy-MM-dd")</dd>
+
+            <dt>Created By:</dt>
+            <dd>@Model.CreatedBy</dd>
+        </dl>
+
+        <form action="@Url.Action("Delete")" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="UniqueId" value="@Model.UniqueId" />
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-primary col-sm-offset-2">
+                    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Cancel
+                </a>
+                <button type="submit" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-trash"></span>&nbsp; Delete
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,160 @@
+﻿@model G4.BizPermit.Entities.BusinessRecord
+@{
+    ViewBag.Title = "Delete Business Record";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header text-center">
+    <h1 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">BUSINESS RECORD</h1>
+</div>
+
+<div class="panel panel-danger">
+    <div class="panel-heading">ARE YOU SURE YOU WANT TO DELETE THIS RECORD?</div>
+    <div class="form-horizontal panel-body">
+
+        <dl class="dl-horizontal">
+            <dt>Owner:</dt>
+            <dd>
+                @foreach (var owner in ViewBag.businessowners)
+                {
+                    if (owner.Id == Model.OwnerId)
+                    {
+                        @owner.LastName@:, @owner.FirstName @owner.MiddleName
+                    }
+
+                }
+            </dd>
+
+            <dt>Business Name:</dt>
+            <dd>@Model.BusinessName</dd>
+
+            <dt>Business Nature:</dt>
+            <dd>
+                @foreach (var nature in ViewBag.businessnatures)
+                {
+                    if (nature.Id == Model.BusinessNatureId)
+                    {
+                        @nature.BusinessNatureName
+                    }
+
+                }
+            </dd>
+
+            <dt>Start Date:</dt>
+            <dd>@Model.StartDate.ToString("yyyy-MM-dd")</dd>
+
+            <dt>Contact No:</dt>
+            <dd>@Model.ContactNo</dd>
+
+            <dt>Fax No:</dt>
+            <dd>@Model.FaxNo</dd>
+
+            <dt>Province:</dt>
+            <dd>
+                @foreach (var province in ViewBag.provinces)
+                {
+                    if (province.Id == Model.ProvinceId)
+                    {
+                        @province.Name
+                    }
+
+                }
+            </dd>
+
+            <dt>City:</dt>
+            <dd>
+                @foreach (var city in ViewBag.cities)
+                {
+                    if (city.Id == Model.CityId)
+                    {
+                        @city.Name
+                    }
+
+                }
+            </dd>
+
+            <dt>District:</dt>
+            <dd>
+                @foreach (var district in ViewBag.districts)
+                {
+                    if (district.Id == Model.DistrictId)
+                    {
+                        @district.Name
+                    }
+
+                }
+            </dd>
+
+            <dt>Barangay:</dt>
+            <dd>
+                @foreach (var barangay in ViewBag.barangays)
+                {
+                    if (barangay.Id == Model.BarangayId)
+                    {
+                        @barangay.Name
+                    }
+
+                }
+            </dd>
+
+            <dt>Street:</dt>
+            <dd>
+                @foreach (var street in ViewBag.streets)
+                {
+                    if (street.Id == Model.StreetId)
+                    {
+                        @street.Name
+                    }
+
+                }
+            </dd>
+
+            <dt>Street No:</dt>
+            <dd>@Model.StreetNo</dd>
+
+            <dt>Block No:</dt>
+            <dd>@Model.BlockNo</dd>
+
+            <dt>Address:</dt>
+            <dd>@Model.Address</dd>
+
+            <dt>Building Name:</dt>
+            <dd>@Model.BuildingName</dd>
+
+            <dt>Floor No:</dt>
+            <dd>@Model.FloorNo</dd>
+
+            <dt>Active?</dt>
+            <dd>@Html.DisplayFor(model => model.isActive)</dd>
+
+            <dt>Business Type:</dt>
+            <dd>
+                @foreach (var type in ViewBag.businesstype)
+                {
+                    if (type.Id == Model.BusinessTypeId)
+                    {
+                        @type.Name
+                    }
+
+                }
+            </dd>
+
+            <dt>Retired?</dt>
+            <dd>@Html.DisplayFor(model => model.isRetired)</dd>
+
+        </dl>
+
+        <form action="@Url.Action("Delete")" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="UniqueId" value="@Model.UniqueId" />
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-primary col-sm-offset-2">
+                    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Cancel
+                </a>
+                <button type="submit" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-trash"></span>&nbsp; Delete
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

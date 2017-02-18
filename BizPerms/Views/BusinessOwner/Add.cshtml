@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "Add Business Owner";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header text-center">
+    <h1 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">BUSINESS OWNER</h1>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">ADD BUSINESS OWNER</div>
+    <div class="form-horizontal panel-body">
+        <form action="@Url.Action("Add")" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Designation:</label>
+                <select class="form-control col-md-10" name="Designation" required>
+                    <option value="">- Select Designation -</option>
+                    @foreach (var designation in ViewBag.designation)
+                    {
+                        <option value="@designation">@designation</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">First Name:</label>
+                <input type="text" class="form-control col-md-10" name="FirstName" placeholder="First Name" required/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Last Name:</label>
+                <input type="text" class="form-control col-md-10" name="LastName" placeholder="Last Name" required/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Middle Name:</label>
+                <input type="text" class="form-control col-md-10" name="MiddleName" placeholder="Middle Name"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Gender:</label>
+                <select class="form-control col-md-10" name="Gender" required>
+                    <option value="">- Select Gender -</option>
+                    @foreach (var gender in ViewBag.gender)
+                    {
+                        <option value="@gender">@gender</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Marital Status:</label>
+                <select class="form-control col-md-10" name="MaritalStatus" required>
+                    <option value="">- Select Marital Status -</option>
+                    @foreach (var status in ViewBag.maritalstatus)
+                    {
+                        <option value="@status">@status</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Birth Date:</label>
+                <input type="date" class="form-control col-md-10" name="BirthDate" placeholder="Birth Date" required/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Corporate Name:</label>
+                <input type="text" class="form-control col-md-10" name="CorporateName" placeholder="Corporate Name" required/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Address:</label>
+                <input type="text" class="form-control col-md-10" name="Address" placeholder="Address"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Contact No:</label>
+                <input type="text" class="form-control col-md-10" name="ContactNo" placeholder="Contact No." />
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Active:</label>
+                <input type="radio" name="isActive" value="true" checked /> True
+                <input type="radio" name="isActive" value="false" /> False
+            </div>
+
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-danger col-sm-offset-2">
+                    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Cancel
+                </a>
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-refresh"></span>&nbsp; Reset
+                </button>
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp; Save
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+

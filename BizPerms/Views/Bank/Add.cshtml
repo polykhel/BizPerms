@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+}
+
+<div class="page-header text-center">
+    <h1 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">BANK</h1>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">ADD BANK</div>
+    <div class="form-horizontal panel-body">
+        <form action="@Url.Action("Add")" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Bank Name:</label>
+                <input type="text" class="form-control col-md-10" name="Name" placeholder="Bank Name" required />
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Active:</label>
+                <input type="radio" name="IsActive" value="true" checked /> True
+                <input type="radio" name="IsActive" value="false" /> False
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Date Created:</label>
+                <input type="date" class="form-control col-md-10" name="CreatedDate" placeholder="Date Created" required />
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Created By:</label>
+                <input type="text" class="form-control col-md-10" name="CreatedBy" placeholder="Created By" />
+            </div>
+  
+
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-danger col-sm-offset-2">
+                    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Cancel
+                </a>
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-refresh"></span>&nbsp; Reset
+                </button>
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp; Save
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

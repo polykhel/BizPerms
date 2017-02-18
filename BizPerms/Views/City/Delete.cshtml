@@ -1,0 +1,54 @@
+﻿@model G4.BizPermit.Entities.City
+
+@{
+    ViewBag.Title = "Delete City";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header text-center">
+    <h1 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">CITY</h1>
+</div>
+
+<div class="panel panel-danger">
+    <div class="panel-heading">ARE YOU SURE YOU WANT TO DELETE THIS RECORD?</div>
+    <div class="form-horizontal panel-body">
+
+        <dl class="dl-horizontal">
+            <dt>City Code:</dt>
+            <dd>@Model.Code</dd>
+
+            <dt>City Name:</dt>
+            <dd>@Model.Name</dd>
+
+            <dt>Description:</dt>
+            <dd>@Model.Description</dd>
+
+            <dt>Province:</dt>
+            <dd>
+                @foreach (var province in ViewBag.provinces)
+                {
+                    if (province.Id == Model.ProvinceId)
+                    {
+                        @province.Name
+                    }
+                }
+            </dd>
+
+            <dt>Active?</dt>
+            <dd>@Html.DisplayFor(model => model.isActive)</dd>
+        </dl>
+
+        <form action="@Url.Action("Delete")" class="form-horizontal" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="UniqueId" value="@Model.UniqueId" />
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-primary col-sm-offset-2">
+                    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Cancel
+                </a>
+                <button type="submit" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-trash"></span>&nbsp; Delete
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

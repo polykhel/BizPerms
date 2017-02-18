@@ -1,0 +1,224 @@
+﻿@model G4.BizPermit.Entities.BusinessRecord
+@{
+    ViewBag.Title = "Edit Business Record";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header text-center">
+    <h1 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">BUSINESS RECORD</h1>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">EDIT BUSINESS RECORD</div>
+    <div class="form-horizontal panel-body">
+        <form action="@Url.Action("Edit")" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="UniqueId" value="@Model.UniqueId" />
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Business Owner:</label>
+                <select class="form-control col-md-10" name="OwnerId" required>
+                    @foreach (var owner in ViewBag.businessowners)
+                    {
+                        if (owner.Id == Model.OwnerId)
+                        {
+                            <option value="@owner.Id" selected>@owner.LastName, @owner.FirstName @owner.MiddleName</option>
+                        }
+                        else
+                        {
+                            <option value="@owner.Id">@owner.LastName, @owner.FirstName @owner.MiddleName</option>
+                        }
+
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Business Name:</label>
+                <input type="text" class="form-control col-md-10" name="BusinessName" value="@Model.BusinessName" placeholder="Business Name" required/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Business Nature (Main):</label>
+                <select class="form-control col-md-10" name="BusinessNatureId" required>
+                    @foreach (var nature in ViewBag.businessnatures)
+                    {
+                        if (nature.Id == Model.BusinessNatureId)
+                        {
+                            <option value="@nature.Id" selected>@nature.BusinessNatureName</option>
+                        }
+                        else
+                        {
+                            <option value="@nature.Id">@nature.BusinessNatureName</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Start Date:</label>
+                <input type="date" class="form-control col-md-10" name="StartDate" value="@Model.StartDate.ToString("yyyy-MM-dd")" required />
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Contact No:</label>
+                <input type="text" class="form-control col-md-10" name="ContactNo" value="@Model.ContactNo" placeholder="Contact No." required />
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Fax No:</label>
+                <input type="text" class="form-control col-md-10" name="FaxNo" value="@Model.FaxNo" placeholder="Fax No." />
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Province:</label>
+                <select class="form-control col-md-10" name="ProvinceId" required>
+                    @foreach (var province in ViewBag.provinces)
+                    {
+                        if (province.Id == Model.ProvinceId)
+                        {
+                            <option value="@province.Id" selected>@province.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@province.Id">@province.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">City:</label>
+                <select class="form-control col-md-10" name="CityId" required>
+                    @foreach (var city in ViewBag.cities)
+                    {
+                        if (city.Id == Model.CityId)
+                        {
+                            <option value="@city.Id" selected>@city.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@city.Id">@city.Name</option>
+                        }
+
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">District:</label>
+                <select class="form-control col-md-10" name="DistrictId" required>
+                    @foreach (var district in ViewBag.districts)
+                    {
+                        if (district.Id == Model.DistrictId)
+                        {
+                            <option value="@district.Id" selected>@district.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@district.Id">@district.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Barangay:</label>
+                <select class="form-control col-md-10" name="DistrictId" required>
+                    @foreach (var barangay in ViewBag.barangays)
+                    {
+                        if (barangay.Id == Model.BarangayId)
+                        {
+                            <option value="@barangay.Id" selected>@barangay.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@barangay.Id">@barangay.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Street:</label>
+                <select class="form-control col-md-10" name="StreetId">
+                    @foreach (var street in ViewBag.streets)
+                    {
+                        if (street.Id == Model.StreetId)
+                        {
+                            <option value="@street.Id" selected>@street.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@street.Id">@street.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Street No:</label>
+                <input type="number" class="form-control col-md-10" name="StreetNo" value="@Model.StreetNo" placeholder="Street No."/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Block No:</label>
+                <input type="number" class="form-control col-md-10" name="BlockNo" value="@Model.BlockNo" placeholder="Block No."/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Address:</label>
+                <input type="text" class="form-control col-md-10" name="Address" value="@Model.Address" required placeholder="Address"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Building Name:</label>
+                <input type="text" class="form-control col-md-10" name="BuildingName" value="@Model.BuildingName" placeholder="Building Name"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Floor No:</label>
+                <input type="number" class="form-control col-md-10" name="FloorNo" value="@Model.FloorNo" placeholder="Floor No."/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Business Type:</label>
+                <select class="form-control col-md-10" name="BusinessTypeId" required>
+                    @foreach (var type in ViewBag.businesstype)
+                    {
+                        if (type.Id == Model.BusinessTypeId)
+                        {
+                            <option value="@type.Id" selected>@type.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@type.Id">@type.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Active:</label>
+                @if (Model.isActive)
+                {
+                    <input type="radio" name="isActive" value="true" checked="checked" /> @:True
+                    <input type="radio" name="isActive" value="false" /> @:False
+                    }
+                else
+                {
+                    <input type="radio" name="isActive" value="true" /> @:True
+                    <input type="radio" name="isActive" value="false" checked="checked" /> @:False
+                }
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Retired:</label>
+                @if (Model.isRetired)
+                {
+                    <input type="radio" name="isRetired" value="true" checked="checked" /> @:True
+                    <input type="radio" name="isRetired" value="false" /> @:False
+                    }
+                else
+                {
+                    <input type="radio" name="isRetired" value="true" /> @:True
+                    <input type="radio" name="isRetired" value="false" checked="checked" /> @:False
+                }
+            </div>
+
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-danger col-sm-offset-2">
+                    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Cancel
+                </a>
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-refresh"></span>&nbsp; Reset
+                </button>
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp; Save
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

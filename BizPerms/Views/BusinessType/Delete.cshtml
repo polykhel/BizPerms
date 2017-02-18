@@ -1,0 +1,43 @@
+﻿@model G4.BizPermit.Entities.BusinessType
+
+@{
+    ViewBag.Title = "Delete Business Type";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header text-center">
+    <h1 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">BUSINESS TYPE</h1>
+</div>
+
+<div class="panel panel-danger">
+    <div class="panel-heading">ARE YOU SURE YOU WANT TO DELETE THIS RECORD?</div>
+    <div class="form-horizontal panel-body">
+
+        <dl class="dl-horizontal">
+            <dt>Business Type Code:</dt>
+            <dd>@Model.Code</dd>
+
+            <dt>Business Type Name:</dt>
+            <dd>@Model.Name</dd>
+
+            <dt>Description:</dt>
+            <dd>@Model.Description</dd>
+
+            <dt>Active?</dt>
+            <dd>@Html.DisplayFor(model => model.isActive)</dd>
+        </dl>
+
+        <form action="@Url.Action("Delete")" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="UniqueId" value="@Model.UniqueId" />
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-danger col-sm-offset-2">
+                    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Back
+                </a>
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp; Save
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

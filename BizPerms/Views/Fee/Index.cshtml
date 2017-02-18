@@ -1,0 +1,83 @@
+﻿@model List<G4.BizPermit.Entities.Fee>
+@{
+    ViewBag.Title = "Fees";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header text-center">
+    <h1 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Fees Master</h1>
+</div>
+
+<div class="row" style="padding: 15px">
+    <a type="button" class="btn btn-danger col-lg-1 col-md-2 col-sm-3 col-xs-3" aria-label="left Align" href="/Home">
+        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back
+    </a>
+    <div class="col-lg-10 col-md-8 col-sm-6 col-xs-6"></div>
+    <button type="button" class="btn btn-success col-lg-1 col-md-2 col-sm-3 col-xs-3" aria-label="left Align" onclick="location.href='@Url.Action("Add")'">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New
+    </button>
+</div>
+
+<div class="panel panel-info">
+    <div class="panel-body table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Rate</th>
+                    <th>Quarterly</th>
+                    <th>Status</th>
+                    <th>Interest</th>
+                    <th>Active</th>
+                    <th>Created Date</th>
+                    <th>Created By</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var entity in Model)
+                {
+                    <tr>
+                        <td>@entity.Name</td>
+                        <td>@entity.Rate</td>
+                        <td>@if (entity.isQuarterly)
+                        {
+                            @:Yes
+                        } else
+                        {
+                            @:No
+                        }
+                        </td>
+                        <td>
+                            @foreach (var status in ViewBag.status)
+                            {
+                                if (@status.Id == @entity.StatusId)
+                                {
+                                    @status.Name
+                                }
+                            }
+                        </td>
+                        <td>@if (entity.withInterest)
+                        {
+                            @:Yes
+                        } else
+                        {
+                            @:No
+                        }
+                        </td>
+                        <td>@entity.isActive</td>
+                        <td>@entity.CreatedDate</td>
+                        <td>@entity.CreatedBy</td>
+                        <td>
+                            <a href="/Fee/Edit/@entity.UniqueId"><span class="glyphicon glyphicon-edit"></span> Edit</a> |
+                            <a href="/Fee/Delete/@entity.UniqueId"><span class="glyphicon glyphicon-trash"></span> Delete </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer text-center">
+        Total of @Model.Count() records.
+    </div>
+</div>

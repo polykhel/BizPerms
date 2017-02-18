@@ -1,0 +1,161 @@
+﻿
+@{
+    ViewBag.Title = "Add Business Record";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header text-center">
+    <h1 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">BUSINESS RECORD</h1>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">ADD BUSINESS RECORD</div>
+    <div class="form-horizontal panel-body">
+        <form action="@Url.Action("Add")" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Business Owner:</label>
+                <select class="form-control col-md-10" name="OwnerId" required>
+                    <option value="" selected disabled>- Select Business Owner -</option>
+                    @foreach (var owner in ViewBag.businessowners)
+                    {
+                        <option value="@owner.Id">@owner.LastName, @owner.FirstName @owner.MiddleName</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Business Name:</label>
+                <input type="text" class="form-control col-md-10" name="BusinessName" placeholder="Business Name" required/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Business Nature (Main):</label>
+                <select class="form-control col-md-10" name="BusinessDetailId" required>
+                    <option value="" selected disabled>- Select Business Detail -</option>
+                    @foreach (var detail in ViewBag.businessdetails)
+                    {
+                        <option value="@detail.Id">@detail.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Start Date:</label>
+                <input type="date" class="form-control col-md-10" name="StartDate" required/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Contact No:</label>
+                <input type="text" class="form-control col-md-10" name="ContactNo" required placeholder="Contact No."/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Fax No:</label>
+                <input type="text" class="form-control col-md-10" name="FaxNo" placeholder="Fax No"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Province:</label>
+                <select id="selectProvince" class="form-control col-md-10" name="ProvinceId" required>
+                    <option value="" selected disabled>- Select Province -</option>
+                    @foreach (var province in ViewBag.provinces)
+                    {
+                        <option value="@province.Id">@province.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">City:</label>
+                <select id="selectCity" class="form-control col-md-10" name="CityId" required>
+                    <option value="" selected disabled>- Select City -</option>
+                    @foreach (var city in ViewBag.cities)
+                    {
+                        <option value="@city.Id">@city.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">District:</label>
+                <select id="selectDistrict" class="form-control col-md-10" name="DistrictId" required>
+                    <option value="" selected disabled>- Select District -</option>
+                    @foreach (var district in ViewBag.districts)
+                    {
+                        <option value="@district.Id">@district.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Barangay:</label>
+                <select id="selectBarangay" class="form-control col-md-10" name="DistrictId" required>
+                    <option value="" selected disabled>- Select Barangay -</option>
+                    @foreach (var barangay in ViewBag.barangays)
+                    {
+                        <option value="@barangay.Id">@barangay.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Street:</label>
+                <select id="selectStreet" class="form-control col-md-10" name="StreetId">
+                    <option value="" selected disabled>- Select Street -</option>
+                    @foreach (var street in ViewBag.streets)
+                    {
+                        <option value="@street.Id">@street.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Street No:</label>
+                <input type="number" class="form-control col-md-10" name="StreetNo" placeholder="Street No." />
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Block No:</label>
+                <input type="number" class="form-control col-md-10" name="BlockNo" placeholder="Block No"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Address:</label>
+                <input type="text" class="form-control col-md-10" name="Address" required placeholder="Address"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Building Name:</label>
+                <input type="text" class="form-control col-md-10" name="BuildingName" placeholder="Building Name"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Floor No:</label>
+                <input type="number" class="form-control col-md-10" name="FloorNo" placeholder="Floor No."/>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Business Type:</label>
+                <select class="form-control col-md-10" name="BusinessTypeId" required>
+                    <option value="" selected disabled>- Select Business Type -</option>
+                    @foreach (var type in ViewBag.businesstype)
+                    {
+                        <option value="@type.Id">@type.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Active:</label>
+                <input type="radio" name="isActive" value="true" checked /> True
+                <input type="radio" name="isActive" value="false" /> False
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Retired:</label>
+                <input type="radio" name="isRetired" value="true" /> True
+                <input type="radio" name="isRetired" value="false" checked /> False
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Retired:</label>
+                <input type="radio" name="isRetired" value="true" /> True
+                <input type="radio" name="isRetired" value="false" checked /> False
+            </div>
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-danger col-sm-offset-2">
+                    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Cancel
+                </a>
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-refresh"></span>&nbsp; Reset
+                </button>
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp; Save
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

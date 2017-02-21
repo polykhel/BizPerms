@@ -30,14 +30,7 @@
 
             <dt>Business Nature:</dt>
             <dd>
-                @foreach (var nature in ViewBag.businessnatures)
-                {
-                    if (nature.Id == Model.BusinessNatureId)
-                    {
-                        @nature.BusinessNatureName
-                    }
-
-                }
+                @Model.BusinessDetail.BusinessLine.BusinessNature.BusinessNatureName
             </dd>
 
             <dt>Start Date:</dt>

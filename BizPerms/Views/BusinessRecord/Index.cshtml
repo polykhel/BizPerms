@@ -48,10 +48,43 @@
                         </td>
                         <td>@entity.StartDate.ToShortDateString()</td>
                         <td>@entity.ContactNo</td>
-                        <td>@entity.isAssessed</td>
-                        <td>@entity.isPayed</td>
+                        <td>@if (entity.isAssessed <= 0)
+                        {
+                            @: False
+                        } else
+                        {
+                            @: True
+                        }</td>
+                        <td>@if (entity.isCollected <= 0)
+                        {
+                            @: False
+                        }
+                        else
+                        {
+                            @: True
+                        }</td>
                         <td>@entity.isActive</td>
-                        <td>@entity.Requirements</td>
+                        <td>@if (entity.BusinessDetail.isNew) {
+                                if (entity.Requirements.Count == ViewBag.GetNew.Count)
+                                {
+                                    @: Yes
+                                } else
+                                {
+                                    @: No
+                                }
+                            }
+                            else
+                            {
+                                if (entity.Requirements.Count == ViewBag.GetReNew.Count)
+                                {
+                                    @: Yes
+                                }
+                                else
+                                {
+                                    @: No
+                                }
+                        }
+                        </td>
                         <td>
                             <a href="/BusinessRecord/Edit/@entity.UniqueId"><span class="glyphicon glyphicon-edit"></span> Edit</a> |
                             <a href="/BusinessRecord/Delete/@entity.UniqueId"><span class="glyphicon glyphicon-trash"></span> Delete </a>

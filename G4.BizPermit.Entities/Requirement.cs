@@ -7,6 +7,10 @@ namespace G4.BizPermit.Entities
 {
     public class Requirement
     {
+        public Requirement()
+        {
+            this.BusinessRecords = new List<BusinessRecord>();
+        }
         [Key]
         public int Id { get; set; }
         public Guid UniqueId { get; set; }

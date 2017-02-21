@@ -1,0 +1,165 @@
+﻿@model BizPerms.Models.CollectionViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header text-center">
+    <h1 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Collection</h1>
+</div>
+<a type="button" class="btn btn-danger col-lg-1 col-md-2 col-sm-3 col-xs-3" aria-label="left Align" href="/Collection">
+    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back
+</a>
+<form id="myForm" action="@Url.Action("Business")" method="post">
+    <br />
+    <br />
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <input type="hidden" name="quarter" value="@Model.quarter" id="quarter" />
+    <input type="hidden" name="lastQuarterPaid" value="@Model.lastQuarterPaid" id="lastQuarterPaid" />
+    <input type="hidden" name="isNew" value="@Model.isNew.ToString()" id="isNewC" />
+    <div class="panel panel-primary container-fluid">
+        <div class="panel-body col-md-12">
+            <p class="text-danger" id="warningSign">Business not yet assessed. Collection is not allowed. Please go back to Assessment.</p>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <div class="row">
+                        <label class="col-md-3">Business Name:</label>
+                        <input type="text" name="BusinessName" value="@Model.BusinessName" class="form-control col-md-9" readonly="readonly" />
+                    </div>
+                    <div class="row">
+                        <br />
+                        <label class="col-md-3">Owner Name:</label>
+                        <input type="text" name="OwnerName" value="@Model.OwnerName" class="form-control col-md-9" readonly="readonly" />
+                    </div>
+                </div><div class="form-group col-md-6">
+
+                    <label class="col-md-3">O.R. #:</label>
+                    <input type="text" readonly="readonly" name="orNumber" value="@Model.orNumber" class="form-control col-md-9" />
+                    <label class="col-md-3">O.R. Date:</label>
+                    <input type="date" readonly="readonly" name="orDate" value="@Model.orDate.ToString("yyyy-MM-dd")" class="form-control col-md-9" />
+                </div>
+            </div>
+            <hr style="height: 5px;" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr style="background-color:#808080;color:#ffffff">
+                                    <th class="col-md-1">Type</th>
+                                    <th class="col-md-1">Amount</th>
+                                    <th class="col-md-1">Bank</th>
+                                    <th class="col-md-1">Check #</th>
+                                    <th class="col-md-1">Check Date</th>
+                                </tr>
+                            </thead>
+                            <tbody style="background-color:#ffffff">
+                                <tr>
+                                    <td height="25px"> </td>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td> </td>
+                                </tr>
+                                <tr>
+                                    <td height="25px">  </td>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td> </td>
+                                </tr>
+                                <tr>
+                                    <td height="25px">  </td>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td> </td>
+                                </tr>
+                                <tr>
+                                    <td height="25px">  </td>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <!-- Button trigger modal -->
+                        <button type="button" id="myModalToggle" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                            Launch demo modal
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Cash or Check?</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="row">
+                                <label class="col-md-offset-1 col-md-4">Payable Amount:</label>
+                                <input id="txtPayableAmount" step="0.01" style="direction:RTL" type="number" name="payableAmount" class="form-control col-md-6" readonly="readonly" />
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <label class="col-md-offset-1 col-md-4">Tendered Amount:</label>
+                                <input type="number" step="0.01" style="direction:RTL; unicode-bidi: embed;" name="tenderedAmount" class="form-control col-md-6" id="txtTenderedAmount" />
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <label class="col-md-offset-1 col-md-4">Change Amount:</label>
+                                <input type="number" readonly="readonly" step="0.01" style="text-align:right" name="changeAmount" class="form-control col-md-6" id="txtChangeAmount" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-md-offset-1">
+                    <div class="row">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-2">Fees name</th>
+                                    <th class="col-md-1">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="feeBody">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                            <tfoot id="total">
+                                <tr>
+                                    <td>TOTAL</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row col-md-12">
+                <br />
+                <button id="postPayment" disabled type="submit" class="btn btn-success col-md-2 pull-right">POST PAYMENT</button>
+            </div>
+        </div>
+    </div>
+</form>
+

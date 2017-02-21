@@ -10,11 +10,8 @@ namespace G4.BizPermit.Dal
     {
         public static List<BusinessRecord> ListAll()
         {
-            using (DB context = new DB())
-            {
+            DB context = new DB();
                 return context.BusinessRecords.Include(x => x.Barangay)
-                    .Include(x => x.BusinessDetail)
-                    .Include(x => x.BusinessDetail.BusinessLine)
                     .Include(x => x.BusinessDetail.BusinessLine.BusinessNature)
                     .Include(x => x.BusinessType)
                     .Include(x => x.City)
@@ -24,13 +21,16 @@ namespace G4.BizPermit.Dal
                     .Include(x => x.Requirements)
                     .Include(x => x.Street)
                     .ToList();
-            }
         }
+        public static List<int> GetAllReqId(int id)
+        {
+            DB context = new DB();
+            return context.BusinessRecords.Find(id).Requirements.Select(x => x.Id).ToList();
 
+        }
         public static bool Add(BusinessRecord obj)
         {
-            using (DB context = new DB())
-            {
+            DB context = new DB();
                 obj.UniqueId = Guid.NewGuid();
                 context.BusinessRecords.Add(obj);
                 try
@@ -43,14 +43,22 @@ namespace G4.BizPermit.Dal
                 }
 
                 return true;
-            }
         }
 
         public static bool Delete(String UniqueId)
         {
             using (DB context = new DB())
             {
-                BusinessRecord obj = context.BusinessRecords.Where(o => o.UniqueId == new Guid(UniqueId)).SingleOrDefault();
+                BusinessRecord obj = context.BusinessRecords.Include(x => x.Barangay)
+                    .Include(x => x.BusinessDetail.BusinessLine.BusinessNature)
+                    .Include(x => x.BusinessType)
+                    .Include(x => x.City)
+                    .Include(x => x.District)
+                    .Include(x => x.BusinessOwner)
+                    .Include(x => x.Province)
+                    .Include(x => x.Requirements)
+                    .Include(x => x.Street).Where(o => o.UniqueId == new Guid(UniqueId)).SingleOrDefault();
+                //get offical receipt
                 context.BusinessRecords.Remove(obj);
                 try
                 {
@@ -106,7 +114,15 @@ namespace G4.BizPermit.Dal
         {
             using (DB context = new DB())
             {
-                BusinessRecord obj = context.BusinessRecords.Where(o => o.UniqueId == new Guid(uniqueId)).SingleOrDefault();
+                BusinessRecord obj = context.BusinessRecords.Include(x => x.Barangay)
+                    .Include(x => x.BusinessDetail.BusinessLine.BusinessNature)
+                    .Include(x => x.BusinessType)
+                    .Include(x => x.City)
+                    .Include(x => x.District)
+                    .Include(x => x.BusinessOwner)
+                    .Include(x => x.Province)
+                    .Include(x => x.Requirements)
+                    .Include(x => x.Street).Where(o => o.UniqueId == new Guid(uniqueId)).SingleOrDefault();
                 return obj;
             }
         }

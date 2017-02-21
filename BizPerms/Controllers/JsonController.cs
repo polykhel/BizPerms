@@ -4,6 +4,8 @@ using System.Web.Mvc;
 using G4.BizPermit.Entities;
 using G4.BizPermit.Dal;
 using BizPerms.Helpers;
+using System.Data.Entity;
+using System.Linq;
 
 namespace G4.BizPermit.Web.Controllers
 {
@@ -14,6 +16,26 @@ namespace G4.BizPermit.Web.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        public ActionResult Fees()
+        {
+            DB db = new DB();
+            List<Fee> fees = db.Fees.ToList();
+            return Json(new { fees, isSuccess = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult NewFees()
+        {
+            DB db = new DB();
+            List<Fee> fees = db.Fees.Include(x => x.Status).Where(x => x.StatusId != 2).ToList();
+            return Json(new { fees, isSuccess = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult RenewFees()
+        {
+            DB db = new DB();
+            List<Fee> fees = db.Fees.Include(x => x.Status).Where(x => x.StatusId != 1).ToList();
+            return Json(new { fees, isSuccess = true }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Barangays

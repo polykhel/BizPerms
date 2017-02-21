@@ -1,0 +1,185 @@
+﻿@model BizPerms.Models.AssessmentViewModel
+@{
+    ViewBag.Title = "Assessment";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="page-header text-center">
+    <h1 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Assessment</h1>
+</div>
+<a type="button" class="btn btn-danger col-lg-1 col-md-2 col-sm-3 col-xs-3" aria-label="left Align" href="/Assessment">
+    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back
+</a>
+<form action="@Url.Action("Business")" method="post">
+    <br />
+    <br />
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <input type="hidden" name="completeRequirements" value="@Model.completeRequirements.ToString()" id="completeRequirements"/>
+    <div id="myAssessmentForm" class="panel panel-primary">
+        <div class="panel-body col-md-12">
+            <p class="text-danger" id="incompleteRequirements">Requirements incomplete. Please accomplish all requirements before proceeding to Assessment.</p>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <div class="row">
+                        <label class="col-md-3">Business Name:</label>
+                        <input type="text" name="BusinessName" value="@Model.BusinessName" class="form-control col-md-9" readonly="readonly"/>
+                    </div>
+                    <div class="row">
+                        <br />
+                        <label class="col-md-3">Owner Name:</label>
+                        <input type="text" name="OwnerName" value="@Model.OwnerName" class="form-control col-md-9" readonly="readonly"/>
+                    </div>
+                    <div class="row">
+                        <br />
+                        <label class="col-md-3">Business Address:</label>
+                        <textarea name="Address" class="form-control col-md-9" readonly="readonly">@Model.Address</textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="row">
+                        <label class="col-md-3">Last Quarter Paid:</label>
+                        <input type="text" name="lastQuarterPaid" value="@Model.lastQuarterPaid" class="form-control col-md-9" readonly="readonly"/>
+                        <input type="hidden" name="lastDatePaid" value="@Model.lastDatePaid" />
+                    </div>
+                    <div class="row" align="center">
+                        @if (Model.isNew)
+                        {
+                            <label><input type="radio" name="isNew" checked/> New</label>
+                            <label><input type="radio" name="isNew" disabled /> Renewal</label>
+                        }
+                        else
+                        {
+                            <label><input type="radio" name="isNew" disabled /> New</label>
+                            <label><input type="radio" name="isNew" checked /> Renewal</label>
+                        }
+                        <br />
+                        @if (Model.completeRequirements)
+                        {
+                            <button type="button" class="btn btn-info" id="btnCompute">Compute</button>
+                        }
+                        else
+                        {
+                            <button disabled type="button" class="btn btn-info" id="btnCompute">Compute</button>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <table class="table table-bordered col-md-12">
+                    <thead>
+                        <tr style="background-color:#808080;color:#ffffff">
+                            <th class="col-md-6">Fees</th>
+                            <th class="col-md-2">Amount</th>
+                            <th class="col-md-2">Surcharge</th>
+                            <th class="col-md-2">Total Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="feeBody" style="background-color:#ffffff">
+                        <tr>
+                            <td height="25px"></td>
+                            <td></td>
+                            <td></td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td height="25px"></td>
+                            <td></td>
+                            <td></td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td height="25px"></td>
+                            <td></td>
+                            <td></td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td height="25px"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td height="25px"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td height="25px"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td height="25px"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td height="25px"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tfoot id="total" style="background-color:#ffffff">
+                        <tr>
+                            <td>TOTAL</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                    </tfoot>
+
+                </table>
+                <div align="center">
+                    @if (Model.isFirst == true)
+                    {
+                        <label class="col-md-3"><input name="quarter" type="radio" id="first" value="first" disabled/> 1st Quarter</label>
+                    }
+                    else
+                    {
+                    <label class="col-md-3"><input name="quarter" type="radio" id="first" value="first" /> 1st Quarter</label>
+                    }
+                    @if (Model.isSecond == true)
+                    {
+                        <label class="col-md-3"><input name="quarter" type="radio" id="second" value="second" disabled/> 2nd Quarter</label>
+                    }
+                    else
+                    {
+                    <label class="col-md-3"><input name="quarter" type="radio" id="second" value="second" /> 2nd Quarter</label>
+                    }
+                    @if (Model.isThird == true)
+                    {
+                    <label class="col-md-3"><input name="quarter" type="radio" id="third" value="third" disabled/> 3rd Quarter</label>
+                    }
+                    else
+                    {
+                        <label class="col-md-3"><input name="quarter" type="radio" id="third" value="third" /> 3rd Quarter</label>
+                    }
+                    @if (Model.isFourth == true)
+                    {
+                        <label class="col-md-3"><input name="quarter" type="radio" id="fourth" value="fourth" disabled/> 4th Quarter</label>
+                    }
+                    else
+                    {
+                    <label class="col-md-3"><input name="quarter" type="radio" id="fourth" value="fourth" /> 4th Quarter</label>
+                    }
+                </div>
+                <input type="hidden" id="isPayed" name="isPayed" value="@Model.isCollected.ToString()" />
+                <input type="hidden" id="isFirst" name="isFirst" value="@Model.isFirst.ToString()" />
+                <input type="hidden" id="isSecond" name="isSecond" value="@Model.isSecond.ToString()" />
+                <input type="hidden" id="isThird" name="isThird" value="@Model.isThird.ToString()" />
+                <input type="hidden" id="isFourth" name="isFourth" value="@Model.isFourth.ToString()" />
+            </div>
+            <div class="row col-md-12">
+                <br />
+                <button disabled type="submit" class="btn btn-success col-md-2 pull-right">ASSESS</button>
+            </div>
+        </div>
+    </div>
+
+
+</form>

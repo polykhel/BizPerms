@@ -10,7 +10,7 @@ namespace G4.BizPermit.Dal.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(G4.BizPermit.Dal.DB context)
@@ -99,10 +99,11 @@ namespace G4.BizPermit.Dal.Migrations
             bd1.BirthDate = DateTime.Now;
             bd1.Name = "biz1";
             bd1.BusinessLine = bl1;
-            bd1.Capital = (decimal) 100.12;
+            bd1.Capital = (decimal)100.12;
             bd1.Gross = (decimal)234.23;
             bd1.isNew = true;
-            bd1.lastPayDate = Convert.ToDateTime("12/31/2016");
+            bd1.lastPayDate = DateTime.ParseExact("2016-12-31", "yyyy-MM-dd",
+                                       System.Globalization.CultureInfo.InvariantCulture);
             bd1.UniqueId = Guid.NewGuid();
 
             BusinessDetail bd2 = new BusinessDetail();
@@ -112,7 +113,8 @@ namespace G4.BizPermit.Dal.Migrations
             bd2.Capital = (decimal)200.12;
             bd2.Gross = (decimal)2134.23;
             bd2.isNew = true;
-            bd2.lastPayDate = Convert.ToDateTime("12/31/2016");
+            bd2.lastPayDate = DateTime.ParseExact("2016-12-31", "yyyy-MM-dd",
+                                       System.Globalization.CultureInfo.InvariantCulture);
             bd2.UniqueId = Guid.NewGuid();
             //BUSINESS DETAIL -- END
 
@@ -125,7 +127,8 @@ namespace G4.BizPermit.Dal.Migrations
             bo1.UniqueId = Guid.NewGuid();
             bo1.Gender = "Male";
             bo1.CorporateName = "Jollibee";
-            bo1.BirthDate = Convert.ToDateTime("06/13/1996");
+            bo1.BirthDate = DateTime.ParseExact("1996-06-13", "yyyy-MM-dd",
+                                       System.Globalization.CultureInfo.InvariantCulture);
             bo1.ContactNo = "1234";
             bo1.Designation = "Mr.";
             bo1.isActive = true;
@@ -138,12 +141,13 @@ namespace G4.BizPermit.Dal.Migrations
             bo2.UniqueId = Guid.NewGuid();
             bo2.Gender = "Female";
             bo2.CorporateName = "Mayaman Corp";
-            bo2.BirthDate = Convert.ToDateTime("02/21/1997");
+            bo2.BirthDate = DateTime.ParseExact("2016-12-31", "yyyy-MM-dd",
+                                       System.Globalization.CultureInfo.InvariantCulture);
             bo2.ContactNo = "1234";
             bo2.Designation = "Ms.";
             bo2.isActive = true;
             //BUSINESS OWNER -- END
-            
+
             //BUSINESS TYPE -- START
             BusinessType bt1 = new BusinessType();
             bt1.Name = "Sole Proprietorship";
@@ -368,7 +372,8 @@ namespace G4.BizPermit.Dal.Migrations
             cut1.IsActive = true;
             cut1.CreatedDate = DateTime.Now;
             cut1.CreatedBy = 1;
-            cut1.CuttoffDate = Convert.ToDateTime("03/31/2017");
+            cut1.CuttoffDate = DateTime.ParseExact("2017-03-31", "yyyy-MM-dd",
+                                       System.Globalization.CultureInfo.InvariantCulture);
 
             Cutoff cut2 = new Cutoff();
             cut2.Name = "2nd";
@@ -376,7 +381,8 @@ namespace G4.BizPermit.Dal.Migrations
             cut2.IsActive = true;
             cut2.CreatedDate = DateTime.Now;
             cut2.CreatedBy = 1;
-            cut2.CuttoffDate = Convert.ToDateTime("06/30/2017");
+            cut2.CuttoffDate = DateTime.ParseExact("2017-06-30", "yyyy-MM-dd",
+                                       System.Globalization.CultureInfo.InvariantCulture);
 
             Cutoff cut3 = new Cutoff();
             cut3.Name = "3rd";
@@ -384,7 +390,8 @@ namespace G4.BizPermit.Dal.Migrations
             cut3.IsActive = true;
             cut3.CreatedDate = DateTime.Now;
             cut3.CreatedBy = 1;
-            cut3.CuttoffDate = Convert.ToDateTime("09/30/2017");
+            cut3.CuttoffDate = DateTime.ParseExact("2017-09-30", "yyyy-MM-dd",
+                                       System.Globalization.CultureInfo.InvariantCulture);
 
             Cutoff cut4 = new Cutoff();
             cut4.Name = "4th";
@@ -392,7 +399,8 @@ namespace G4.BizPermit.Dal.Migrations
             cut4.IsActive = true;
             cut4.CreatedDate = DateTime.Now;
             cut4.CreatedBy = 1;
-            cut4.CuttoffDate = Convert.ToDateTime("12/31/2017");
+            cut4.CuttoffDate = DateTime.ParseExact("2017-12-31", "yyyy-MM-dd",
+                                       System.Globalization.CultureInfo.InvariantCulture);
             //CUTOFF -- END
 
             //STATUS -- START
@@ -414,72 +422,6 @@ namespace G4.BizPermit.Dal.Migrations
             stat3.CreatedDate = DateTime.Now;
             stat3.CreatedBy = 1;
             //STATUS -- END
-
-            //REQUIREMENTS -- START
-            Requirement req1 = new Requirement();
-            req1.Name = "Barangay Clearance";
-            req1.Status = stat1;
-            req1.UniqueId = Guid.NewGuid();
-            req1.IsActive = true;
-            req1.CreatedBy = 1;
-            req1.CreatedDate = DateTime.Now;
-
-            Requirement req2 = new Requirement();
-            req2.Name = "Authorization Letter of Owner and ID";
-            req2.Status = stat3;
-            req2.UniqueId = Guid.NewGuid();
-            req2.IsActive = true;
-            req2.CreatedBy = 1;
-            req2.CreatedDate = DateTime.Now;
-
-            Requirement req3 = new Requirement();
-            req3.Name = "Lease Contract / Tax Declaration";
-            req3.Status = stat3;
-            req3.UniqueId = Guid.NewGuid();
-            req3.IsActive = true;
-            req3.CreatedBy = 1;
-            req3.CreatedDate = DateTime.Now;
-
-            Requirement req4 = new Requirement();
-            req4.Name = "SSS (Certification / Clearance)";
-            req4.Status = stat3;
-            req4.UniqueId = Guid.NewGuid();
-            req4.IsActive = true;
-            req4.CreatedBy = 1;
-            req4.CreatedDate = DateTime.Now;
-
-            Requirement req5 = new Requirement();
-            req5.Name = "CTC (Community Tax Certificate)";
-            req5.Status = stat3;
-            req5.UniqueId = Guid.NewGuid();
-            req5.IsActive = true;
-            req5.CreatedBy = 1;
-            req5.CreatedDate = DateTime.Now;
-
-            Requirement req6 = new Requirement();
-            req6.Name = "Public Liability Insurance";
-            req6.Status = stat2;
-            req6.UniqueId = Guid.NewGuid();
-            req6.IsActive = true;
-            req6.CreatedBy = 1;
-            req6.CreatedDate = DateTime.Now;
-
-            Requirement req7 = new Requirement();
-            req7.Name = "SEC Registration";
-            req7.Status = stat2;
-            req7.UniqueId = Guid.NewGuid();
-            req7.IsActive = true;
-            req7.CreatedBy = 1;
-            req7.CreatedDate = DateTime.Now;
-
-            Requirement req8 = new Requirement();
-            req8.Name = "DTI";
-            req8.Status = stat2;
-            req8.UniqueId = Guid.NewGuid();
-            req8.IsActive = true;
-            req8.CreatedBy = 1;
-            req8.CreatedDate = DateTime.Now;
-            //REQUIREMENTS -- END
 
             //FEES -- START
             Fee fee1 = new Fee();
@@ -570,7 +512,99 @@ namespace G4.BizPermit.Dal.Migrations
             fee8.CreatedDate = DateTime.Now;
             fee8.Status = stat3;
             //FEE -- END
-            
+
+            //REQUIREMENTS -- START
+            Requirement req1 = new Requirement();
+            req1.Name = "Barangay Clearance";
+            req1.Status = stat1;
+            req1.UniqueId = Guid.NewGuid();
+            req1.IsActive = true;
+            req1.CreatedBy = 1;
+            req1.CreatedDate = DateTime.Now;
+
+            Requirement req2 = new Requirement();
+            req2.Name = "Authorization Letter of Owner and ID";
+            req2.Status = stat3;
+            req2.UniqueId = Guid.NewGuid();
+            req2.IsActive = true;
+            req2.CreatedBy = 1;
+            req2.CreatedDate = DateTime.Now;
+
+            Requirement req3 = new Requirement();
+            req3.Name = "Lease Contract / Tax Declaration";
+            req3.Status = stat3;
+            req3.UniqueId = Guid.NewGuid();
+            req3.IsActive = true;
+            req3.CreatedBy = 1;
+            req3.CreatedDate = DateTime.Now;
+
+            Requirement req4 = new Requirement();
+            req4.Name = "SSS (Certification / Clearance)";
+            req4.Status = stat3;
+            req4.UniqueId = Guid.NewGuid();
+            req4.IsActive = true;
+            req4.CreatedBy = 1;
+            req4.CreatedDate = DateTime.Now;
+
+            Requirement req5 = new Requirement();
+            req5.Name = "CTC (Community Tax Certificate)";
+            req5.Status = stat3;
+            req5.UniqueId = Guid.NewGuid();
+            req5.IsActive = true;
+            req5.CreatedBy = 1;
+            req5.CreatedDate = DateTime.Now;
+
+            Requirement req6 = new Requirement();
+            req6.Name = "Public Liability Insurance";
+            req6.Status = stat2;
+            req6.UniqueId = Guid.NewGuid();
+            req6.IsActive = true;
+            req6.CreatedBy = 1;
+            req6.CreatedDate = DateTime.Now;
+
+            Requirement req7 = new Requirement();
+            req7.Name = "SEC Registration";
+            req7.Status = stat2;
+            req7.UniqueId = Guid.NewGuid();
+            req7.IsActive = true;
+            req7.CreatedBy = 1;
+            req7.CreatedDate = DateTime.Now;
+
+            Requirement req8 = new Requirement();
+            req8.Name = "DTI";
+            req8.Status = stat2;
+            req8.UniqueId = Guid.NewGuid();
+            req8.IsActive = true;
+            req8.CreatedBy = 1;
+            req8.CreatedDate = DateTime.Now;
+            //REQUIREMENTS -- END
+
+            BusinessRecord br = new BusinessRecord();
+            br.Barangay = bar1;
+            br.BlockNo = 1;
+            br.BuildingName = "adwa";
+            br.BusinessDetail = bd1;
+            br.BusinessName = "Mayaman Corp.";
+            br.BusinessOwner = bo2;
+            br.BusinessType = bt3;
+            br.City = city1;
+            br.Province = prov1;
+			br.District = dist1;
+            br.StartDate = DateTime.Now;
+            br.Street = st1;
+            br.StreetNo = 1;
+            br.UniqueId = Guid.NewGuid();
+            br.isActive = true;
+            br.isAssessed = 0;
+            br.isCollected = 0;
+            br.isRetired = false;
+            br.Address = "adwad";
+            br.ContactNo = "12313";
+            br.FaxNo = "2131";
+            br.FloorNo = 2;
+            br.Requirements.Add(req1);
+            br.Requirements.Add(req2);
+
             context.BusinessNatures.AddOrUpdate(bn1, bn2, bn3, bn4, bn5);
             context.BusinessLines.AddOrUpdate(bl1, bl2, bl3, bl4, bl5);
             context.BusinessDetails.AddOrUpdate(bd1, bd2);
@@ -585,8 +619,9 @@ namespace G4.BizPermit.Dal.Migrations
             context.Quarters.AddOrUpdate(qrt1, qrt2, qrt3, qrt4);
             context.Cutoffs.AddOrUpdate(cut1, cut2, cut3, cut4);
             context.Statuses.AddOrUpdate(stat1, stat2, stat3);
-            context.Requirements.AddOrUpdate(req1, req2, req3, req4, req5, req6, req7, req8);
             context.Fees.AddOrUpdate(fee1, fee2, fee3, fee4, fee5, fee6, fee7, fee8);
+            context.Requirements.AddOrUpdate(req1, req2, req3, req4, req5, req6, req7, req8);
+            context.BusinessRecords.AddOrUpdate(br);
         }
     }
 }

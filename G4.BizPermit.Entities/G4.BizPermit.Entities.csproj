@@ -58,9 +58,11 @@
     <Compile Include="BusinessRecord.cs" />
     <Compile Include="BusinessType.cs" />
     <Compile Include="City.cs" />
+    <Compile Include="Collection.cs" />
     <Compile Include="Cutoff.cs" />
     <Compile Include="District.cs" />
     <Compile Include="Fee.cs" />
+    <Compile Include="OfficialReceipt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Province.cs" />
     <Compile Include="Quarter.cs" />

@@ -10,10 +10,19 @@ namespace G4.BizPermit.Dal
     {
         public static List<Requirement> ListAll()
         {
-            using (DB context = new DB())
-            {
+            DB context = new DB();
                 return context.Requirements.Include(x => x.Status).ToList();
-            }
+        }
+
+        public static List<Requirement> GetNew()
+        {
+            DB context = new DB();
+                return context.Requirements.Include(x => x.Status).Where(x => x.StatusId != 2).ToList();
+        }
+        public static List<Requirement> GetRenew()
+        {
+            DB context = new DB();
+                return context.Requirements.Include(x => x.Status).Where(x => x.StatusId != 1).ToList();
         }
 
         public static bool Add(Requirement obj)

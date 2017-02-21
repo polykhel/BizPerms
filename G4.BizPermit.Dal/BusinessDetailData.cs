@@ -81,7 +81,7 @@ namespace G4.BizPermit.Dal
         {
             using (DB context = new DB())
             {
-                BusinessDetail obj = context.BusinessDetails.Where(o => o.UniqueId == new Guid(id)).SingleOrDefault();
+                BusinessDetail obj = context.BusinessDetails.Include(x => x.BusinessLine).Where(o => o.UniqueId == new Guid(id)).SingleOrDefault();
                 return obj;
             }
         }

@@ -50,8 +50,8 @@ namespace G4.BizPermit.Entities
         [ForeignKey("BusinessTypeId")]
         public virtual BusinessType BusinessType { get; set; }
         public bool isRetired { get; set; }
-        public bool isAssessed { get; set; }
-        public bool isPayed { get; set; }
+        public int? isAssessed { get; set; }
+        public int? isCollected { get; set; }
         public virtual ICollection<Requirement> Requirements { get; set; }
     }
 }

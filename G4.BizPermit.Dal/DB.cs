@@ -32,5 +32,6 @@ namespace G4.BizPermit.Dal
         public DbSet<Requirement> Requirements { get; set; }
         public DbSet<Fee> Fees { get; set; }
 		public DbSet<Bank> BankRecords {get; set; }
+        public DbSet<OfficialReceipt> OfficialReceipts { get; set; }
     }
 }

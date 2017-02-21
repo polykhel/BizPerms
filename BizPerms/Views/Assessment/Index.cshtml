@@ -1,0 +1,139 @@
+﻿@model BizPerms.Models.BusinessViewModel
+@{
+    ViewBag.Title = "Assessment";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="page-header text-center">
+    <h1 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Assessment</h1>
+</div>
+<form action="@Url.Action("Assesment")" method="post">
+    <br />
+    <br />
+    <div class="panel panel-primary">
+        <div class="panel-body col-md-12">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <div class="row">
+                        <label class="col-md-3">Business Name:</label>
+                        @Html.DropDownList("BusinessName", Model.BusinessNames, "---Business Name---", new { @onChange = "location.href=this.options[this.selectedIndex].value;", @id = "BusinessName", @class = "form-control col-md-9" })
+                        @*<select id="BusinessName" class="form-control col-md-9">
+                                <option selected disabled>---Business Name---</option>
+                                @foreach(var entity in Model)
+                                {
+                                    <option value="@entity.Id">@entity.BusinessName</option>
+                                }
+                            </select>*@
+                    </div>
+                    <div class="row">
+                        <br />
+                        <label class="col-md-3">Owner Name:</label>
+                        <input type="text" id="OwnerName" class="form-control col-md-9" />
+                    </div>
+                    <div class="row">
+                        <br />
+                        <label class="col-md-3">Business Address:</label>
+                        <textarea id="Address" class="form-control col-md-9"></textarea>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="row">
+                        <label class="col-md-3">Last Quarter Paid:</label>
+                        <select id="lastQuarterPaid" class="form-control col-md-9">
+                            <option>-----None----</option>
+                        </select>
+
+                    </div>
+                    <div class="row" align="center">
+                        <label><input type="radio" name="isNew" /> New</label>
+                        <label><input type="radio" name="isNew" /> Renewal</label><br />
+                        <button Type="submit" class="btn btn-info" id="btnCompute">Compute</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <table class="table table-bordered col-md-12">
+                    <thead>
+                        <tr style="background-color:#808080;color:#ffffff">
+                            <th class="col-md-6">Fees</th>
+                            <th class="col-md-2">Amount</th>
+                            <th class="col-md-2">Surcharge</th>
+                            <th class="col-md-2">Total Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color:#ffffff">
+                        <tr>
+                            <td height="25px"></td>
+                            <td></td>
+                            <td></td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td height="25px"></td>
+                            <td></td>
+                            <td></td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td height="25px"></td>
+                            <td></td>
+                            <td></td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td height="25px"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td height="25px"></td>
+                            <td></td>
+                            <td></td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td height="25px"></td>
+                            <td></td>
+                            <td></td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td height="25px"></td>
+                            <td></td>
+                            <td></td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td height="25px"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tfoot style="background-color:#ffffff">
+                        <tr>
+                            <td>TOTAL</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                    </tfoot>
+
+                </table>
+                <div align="center">
+                    <label class="col-md-3"><input type="radio" id="Renew" /> 1st Quarter</label>
+                    <label class="col-md-3"><input type="radio" id="Renew" /> 2nd Quarter</label>
+                    <label class="col-md-3"><input type="radio" id="Renew" /> 3rd Quarter</label>
+                    <label class="col-md-3"><input type="radio" id="Renew" /> 4th Quarter</label>
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <br />
+                <button disabled type="submit" class="btn btn-success col-md-2 pull-right">POST</button>
+            </div>
+        </div>
+    </div>
+
+
+</form>

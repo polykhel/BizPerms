@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Business Name:</label>
-                <input type="text" class="form-control col-md-10" name="BusinessName" placeholder="Business Name" required/>
+                <input type="text" class="form-control col-md-10" name="BusinessName" placeholder="Business Name" required />
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Business Nature (Main):</label>
@@ -40,15 +40,15 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Start Date:</label>
-                <input type="date" class="form-control col-md-10" name="StartDate" required/>
+                <input type="date" class="form-control col-md-10" name="StartDate" required />
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Contact No:</label>
-                <input type="text" class="form-control col-md-10" name="ContactNo" required placeholder="Contact No."/>
+                <input type="text" class="form-control col-md-10" name="ContactNo" required placeholder="Contact No." />
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Fax No:</label>
-                <input type="text" class="form-control col-md-10" name="FaxNo" placeholder="Fax No"/>
+                <input type="text" class="form-control col-md-10" name="FaxNo" placeholder="Fax No" />
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Province:</label>
@@ -82,7 +82,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Barangay:</label>
-                <select id="selectBarangay" class="form-control col-md-10" name="DistrictId" required>
+                <select id="selectBarangay" class="form-control col-md-10" name="BarangayId" required>
                     <option value="" selected disabled>- Select Barangay -</option>
                     @foreach (var barangay in ViewBag.barangays)
                     {
@@ -106,19 +106,19 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Block No:</label>
-                <input type="number" class="form-control col-md-10" name="BlockNo" placeholder="Block No"/>
+                <input type="number" class="form-control col-md-10" name="BlockNo" placeholder="Block No" />
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Address:</label>
-                <input type="text" class="form-control col-md-10" name="Address" required placeholder="Address"/>
+                <input type="text" class="form-control col-md-10" name="Address" required placeholder="Address" />
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Building Name:</label>
-                <input type="text" class="form-control col-md-10" name="BuildingName" placeholder="Building Name"/>
+                <input type="text" class="form-control col-md-10" name="BuildingName" placeholder="Building Name" />
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Floor No:</label>
-                <input type="number" class="form-control col-md-10" name="FloorNo" placeholder="Floor No."/>
+                <input type="number" class="form-control col-md-10" name="FloorNo" placeholder="Floor No." />
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Business Type:</label>
@@ -141,9 +141,17 @@
                 <input type="radio" name="isRetired" value="false" checked /> False
             </div>
             <div class="form-group">
-                <label class="control-label col-md-2">Retired:</label>
-                <input type="radio" name="isRetired" value="true" /> True
-                <input type="radio" name="isRetired" value="false" checked /> False
+                <label class="control-label col-md-2">Requirements (check all accomplished):</label>
+                <table>
+                    @foreach (var reqs in ViewBag.Requirements)
+                    {
+                        <tr>
+                            <td>
+                                <label><input type="checkbox" name="selectedReqs" value="@reqs.Id" id="@reqs.Id">@reqs.Name</label>
+                            </td>
+                        </tr>
+                    }
+                </table>
             </div>
             <div class="form-group">
                 <a href="@Url.Action("Index")" class="btn btn-danger col-sm-offset-2">

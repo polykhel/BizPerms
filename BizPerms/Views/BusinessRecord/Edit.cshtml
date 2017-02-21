@@ -14,7 +14,6 @@
         <form action="@Url.Action("Edit")" method="post">
             @Html.AntiForgeryToken()
             <input type="hidden" name="UniqueId" value="@Model.UniqueId" />
-
             <div class="form-group">
                 <label class="control-label col-md-2">Business Owner:</label>
                 <select class="form-control col-md-10" name="OwnerId" required>
@@ -38,16 +37,16 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Business Nature (Main):</label>
-                <select class="form-control col-md-10" name="BusinessNatureId" required>
-                    @foreach (var nature in ViewBag.businessnatures)
+                <select class="form-control col-md-10" name="BusinessDetailId" required>
+                    @foreach (var detail in ViewBag.businessdetails)
                     {
-                        if (nature.Id == Model.BusinessNatureId)
+                        if (detail.Id == Model.BusinessDetailId)
                         {
-                            <option value="@nature.Id" selected>@nature.BusinessNatureName</option>
+                            <option value="@detail.Id" selected>@detail.Name</option>
                         }
                         else
                         {
-                            <option value="@nature.Id">@nature.BusinessNatureName</option>
+                            <option value="@detail.Id">@detail.Name</option>
                         }
                     }
                 </select>
@@ -66,7 +65,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Province:</label>
-                <select class="form-control col-md-10" name="ProvinceId" required>
+                <select id="selectProvince" class="form-control col-md-10" name="ProvinceId" required>
                     @foreach (var province in ViewBag.provinces)
                     {
                         if (province.Id == Model.ProvinceId)
@@ -82,7 +81,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">City:</label>
-                <select class="form-control col-md-10" name="CityId" required>
+                <select id="selectCity" class="form-control col-md-10" name="CityId" required>
                     @foreach (var city in ViewBag.cities)
                     {
                         if (city.Id == Model.CityId)
@@ -99,7 +98,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">District:</label>
-                <select class="form-control col-md-10" name="DistrictId" required>
+                <select id="selectDistrict" class="form-control col-md-10" name="DistrictId" required>
                     @foreach (var district in ViewBag.districts)
                     {
                         if (district.Id == Model.DistrictId)
@@ -115,7 +114,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Barangay:</label>
-                <select class="form-control col-md-10" name="DistrictId" required>
+                <select id="selectBarangay" class="form-control col-md-10" name="BarangayId" required>
                     @foreach (var barangay in ViewBag.barangays)
                     {
                         if (barangay.Id == Model.BarangayId)
@@ -131,7 +130,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Street:</label>
-                <select class="form-control col-md-10" name="StreetId">
+                <select id="selectStreet" class="form-control col-md-10" name="StreetId">
                     @foreach (var street in ViewBag.streets)
                     {
                         if (street.Id == Model.StreetId)
@@ -207,7 +206,34 @@
                     <input type="radio" name="isRetired" value="false" checked="checked" /> @:False
                 }
             </div>
-
+            <div class="form-group">
+                <label class="control-label col-md-2">Requirements (check all accomplished):</label>
+                <table>
+                    @foreach (var reqs in ViewBag.Requirements)
+                    {
+                        <tr>
+                            <td>
+                                @if (ViewBag.businessRecords.Contains(reqs.Id))
+                                {
+                                    <label><input type="checkbox" name="selectedReqs" checked value="@reqs.Id" id="@reqs.Id">@reqs.Name</label>
+                                }
+                                else
+                                {
+                                    <label><input type="checkbox" name="selectedReqs" value="@reqs.Id" id="@reqs.Id">@reqs.Name</label>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            @if (Model.BusinessDetail.isNew)
+            {
+                <input type="hidden" name="isNew" value="true" />
+            }
+            else
+            {
+                <input type="hidden" name="isNew" value="false" />
+            }
             <div class="form-group">
                 <a href="@Url.Action("Index")" class="btn btn-danger col-sm-offset-2">
                     <span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Cancel
